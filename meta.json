@@ -29,7 +29,6 @@
             "title": "Category"
         }
     ],
-    "providers": [ "foursquare" ],
     "icon": "foursquare",
     "title": "Foursquare: Get Trending"
 }

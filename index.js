@@ -10,28 +10,34 @@ module.exports = {
      * @param {AppData} dexter Container for all data used in this workflow.
      */
     run: function(step, dexter) {
-        var creds = dexter.provider('foursquare').credentials()
-            , foursquare = Foursquare({ secrets: {
-                clientId: creds.client_id,
-                clientSecret: creds.client_secret,
-                redirectUrl: 'http://foo.bar'
-            } })
+        var clientId = dexter.environment('FOURSQUARE_CLIENT_ID')
+            , clientSecret = dexter.environment('FOURSQUARE_CLIENT_SECRET') 
             , lat = step.input('lat').first()
             , lon = step.input('lon').first()
             , categories = step.input('categories').toArray()
             , self = this
+            , foursquare
         ;
         assert(lat);
         assert(lon);
+        assert(clientId, 'FOURSQUARE_CLIENT_ID environment variable required');
+        assert(clientSecret, 'FOURSQUARE_CLIENT_SECRET environment variable required');
+        foursquare = Foursquare({ secrets: {
+            clientId: clientId,
+            clientSecret: clientSecret,
+            redirectUrl: 'http://foo.bar'
+        } });
         foursquare.Venues.getTrending(lat, lon, {}, null, function(err, data) {
-            if(err) return self.fail(err);
+            if(err) {
+                return self.fail(err);
+            }
             self.complete(_.compact(_.map(data.venues, function(venue) {
                 var primaryCategory = null
                     , isMatch = categories.length === 0
                 ;
                 _.each(venue.categories, function(category) {
                     if(category.primary) {
-                        primaryCategory = category.name
+                        primaryCategory = category.name;
                     }
                     if(categories.length > 0 && categories.indexOf(category.name) === 0) {
                         isMatch = true;
