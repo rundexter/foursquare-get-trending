@@ -1,26 +1,35 @@
-/*
- * Metadata describing the module operation
- */
 {
-    //Required. Inputs the module expects.
     "inputs": [
-        //e.g.
-        /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "lat",
+            "title":"Latitude"
+        }, {
+            "id": "lon",
+            "title":"Longitude"
+        }, {
+            "id": "categories",
+            "title": "Categories"
         }
-        */
     ],
-    //Required. Outputs the module emits.
     "outputs": [
-      //e.g.
-      /*
         {
-            "id": "from",
-            "title":"From"
+            "id": "venue_id",
+            "title":"ID"
+        }, {
+            "id": "address",
+            "title":"Address"
+        }, {
+            "id": "url",
+            "title":"URL"
+        }, {
+            "id": "name",
+            "title":"Name"
+        }, {
+            "id": "category",
+            "title": "Category"
         }
-      */
     ],
-    "title": "Foursquare: Get Trending" /* Required.A display name for the module */
+    "providers": [ "foursquare" ],
+    "icon": "foursquare",
+    "title": "Foursquare: Get Trending"
 }
