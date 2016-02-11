@@ -17,6 +17,8 @@ module.exports = {
             , lat = step.input('lat').first()
             , lng = step.input('lng').first()
             , categories = step.input('categories').toArray()
+            , limit = step.input('limit', 25).first()
+            , queryOptions = { limit: limit }
             , self = this
             , foursquare
         ;
@@ -29,7 +31,7 @@ module.exports = {
             clientSecret: clientSecret,
             redirectUrl: 'http://foo.bar'
         } });
-        foursquare.Venues.getTrending(lat, lng, {}, null, function(err, data) {
+        foursquare.Venues.getTrending(lat, lng, queryOptions, null, function(err, data) {
             if(err) {
                 return self.fail(err);
             }

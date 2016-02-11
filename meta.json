@@ -9,6 +9,9 @@
         }, {
             "id": "categories",
             "title": "Categories"
+        }, {
+            "id": "limit",
+            "title": "Max results"
         }
     ],
     "outputs": [
