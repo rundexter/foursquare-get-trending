@@ -43,7 +43,7 @@ module.exports = {
                     if(category.primary) {
                         primaryCategory = category.name;
                     }
-                    if(categories.length > 0 && categories.indexOf(category.name) === 0) {
+                    if(categories.length > 0 && _.indexOf(categories, category.name) === 0) {
                         isMatch = true;
                     }
                 });
