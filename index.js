@@ -18,7 +18,6 @@ module.exports = {
             , lng = step.input('lng').first()
             , categories = step.input('categories').toArray()
             , limit = step.input('limit', 25).first()
-            , queryOptions = { limit: limit }
             , self = this
             , foursquare
         ;
@@ -31,11 +30,11 @@ module.exports = {
             clientSecret: clientSecret,
             redirectUrl: 'http://foo.bar'
         } });
-        foursquare.Venues.getTrending(lat, lng, queryOptions, null, function(err, data) {
+        foursquare.Venues.getTrending(lat, lng, { limit: 50 }, null, function(err, data) {
             if(err) {
                 return self.fail(err);
             }
-            self.complete(_.compact(_.map(data.venues, function(venue) {
+            var results = _.compact(_.map(data.venues, function(venue) {
                 var primaryCategory = null
                     , isMatch = categories.length === 0
                 ;
@@ -55,7 +54,12 @@ module.exports = {
                     , name: venue.name
                     , category: primaryCategory
                 } : null;
-            })));
+            }));
+            if(results.length > limit) {
+                self.complete(results.slice(0, limit));
+            } else {
+                self.complete(results);
+            }
         });
     }
 };
