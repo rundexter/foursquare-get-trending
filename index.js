@@ -46,6 +46,7 @@ module.exports = {
                         isMatch = true;
                     }
                 });
+                console.log('Matching', primaryCategory, '?', isMatch);
 
                 return (isMatch) ? {
                     venue_id: venue.id
