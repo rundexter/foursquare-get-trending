@@ -13,13 +13,13 @@ module.exports = {
         var clientId = dexter.environment('FOURSQUARE_CLIENT_ID')
             , clientSecret = dexter.environment('FOURSQUARE_CLIENT_SECRET') 
             , lat = step.input('lat').first()
-            , lon = step.input('lon').first()
+            , lng = step.input('lng').first()
             , categories = step.input('categories').toArray()
             , self = this
             , foursquare
         ;
         assert(lat);
-        assert(lon);
+        assert(lng);
         assert(clientId, 'FOURSQUARE_CLIENT_ID environment variable required');
         assert(clientSecret, 'FOURSQUARE_CLIENT_SECRET environment variable required');
         foursquare = Foursquare({ secrets: {
@@ -27,7 +27,7 @@ module.exports = {
             clientSecret: clientSecret,
             redirectUrl: 'http://foo.bar'
         } });
-        foursquare.Venues.getTrending(lat, lon, {}, null, function(err, data) {
+        foursquare.Venues.getTrending(lat, lng, {}, null, function(err, data) {
             if(err) {
                 return self.fail(err);
             }
