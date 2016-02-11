@@ -32,7 +32,7 @@ module.exports = _.merge({
             input: {
                 //Replace VAR1 with the name of an expected input, and add more inputs as needed.
                 lat: 40.7,
-                lon: -74
+                lng: -74
             }
         }
     }

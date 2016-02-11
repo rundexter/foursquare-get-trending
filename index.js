@@ -10,8 +10,10 @@ module.exports = {
      * @param {AppData} dexter Container for all data used in this workflow.
      */
     run: function(step, dexter) {
-        var clientId = dexter.environment('FOURSQUARE_CLIENT_ID')
-            , clientSecret = dexter.environment('FOURSQUARE_CLIENT_SECRET') 
+        var credentials = dexter.provider('foursquare').credentials()
+            , clientId = (credentials) ? credentials.client_id : dexter.environment('FOURSQUARE_CLIENT_ID')
+            , clientSecret = (credentials) ? credentials.client_secret : dexter.environment('FOURSQUARE_CLIENT_SECRET') 
+            , accessToken = (credentials) ? credentials.access_token : dexter.environment('FOURSQUARE_ACCESS_TOKEN')
             , lat = step.input('lat').first()
             , lng = step.input('lng').first()
             , categories = step.input('categories').toArray()
