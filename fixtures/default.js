@@ -33,7 +33,8 @@ module.exports = _.merge({
                 //Replace VAR1 with the name of an expected input, and add more inputs as needed.
                 lat: 40.7,
                 lng: -74,
-                limit: 10
+                limit: 10,
+                categories: ['American Restaurant', 'Burger Joint']
             }
         }
     }

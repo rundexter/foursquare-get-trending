@@ -42,11 +42,11 @@ module.exports = {
                     if(category.primary) {
                         primaryCategory = category.name;
                     }
-                    if(categories.length > 0 && _.indexOf(categories, category.name) === 0) {
+                    if(categories.length > 0 && _.indexOf(categories, category.name) >= 0) {
                         isMatch = true;
                     }
                 });
-                console.log('Matching', primaryCategory, '?', isMatch);
+                //console.log('Matching', primaryCategory, '?', isMatch, 'checked', categories.length);
 
                 return (isMatch) ? {
                     venue_id: venue.id
